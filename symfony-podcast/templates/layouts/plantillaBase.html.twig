@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block titulo %} Angel Developer {% endblock %}- www.AngelDeveloper.es <!-- el contenido dentro de block lo puedo modificar, y pongo un contenido por defecto Angel Developer-->
+    </title>
+</head>
+<body>
+<div id="header">
+    {%  block cabecera %}
+        <h1> Cabecera de la plantilla </h1> <!-- contenido por defecto-->
+    {% endblock %}
+</div>
+<hr>
+<section id="content">
+    {% block contenido %}
+        <p> Contenido por defecto</p>
+        <hr>
+    {% endblock %}
+</section>
+<hr>
+<footer align="center">
+    www.AngelDeveloper.es
+</footer>
+</body>
+</html>

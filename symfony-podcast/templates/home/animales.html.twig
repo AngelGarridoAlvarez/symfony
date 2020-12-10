@@ -1,0 +1,131 @@
+{% extends 'layouts/plantillaBase.html.twig' %}
+{# así hago que mi página herede la estructura de la plantilla #}
+
+{% block titulo %}
+    ANIMALES
+{% endblock %}
+
+{% block cabecera %}
+    {{ parent() }} {# Parent hace que se vea el contenido predefinido que tenía en mi plantilla #}
+    <h1>Animales</h1>
+{% endblock %}
+
+{% block contenido %}
+    <h1>{{ title }}</h1>
+    <h2> El nombre del animal es {{ nombre }} - {{ apellidos }}</h2>
+    <hr>
+
+    {# Podemos crear variables en dentro de la vista Twig #}
+
+    {% set perro = 'Pastor Aleman' %}
+
+    <h3> El nombre del animal es {{ perro }}</h3>
+
+    {# Trabajar con Arrays #}
+    <hr>
+    {{ dump(animales) }} {# veo el contenido de mi Array #}
+    {{ animales[2] }}
+
+    {# Arrays Asociativos #}
+    <hr>
+    {{ dump(aves) }}
+    {{ aves.tipo ~ ' - ' ~ aves.raza }}
+
+    {# Condicionales #}
+    <hr>
+    {% if aves.tipo == 'periquito' %}
+        <h3> Cuidado Periquito a la vista </h3>
+    {% else %}
+        <h2> No hay periquitos a la vista </h2>
+    {% endif %}
+
+    {# Bucles #}
+    <hr>
+    {% if animales|length >= 0 %}
+        <ul>
+            {% for animal in animales %}
+                <li>{{ animal }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {# Bucles - de un número a otro #}
+    <hr>
+    {% for i in 0..10 %}
+        {{ i }}<br/>
+    {% endfor %}
+
+    {# Bucles - Starts Ends #}
+    <hr>
+    {% if aves.color starts with "ve" %}
+        <h4>El color del ave empieza por "VE"</h4>
+    {% endif %}
+
+    {% if aves.color ends with "e" %}
+        <h4> El color del ave acaba en "E"</h4>
+    {% endif %}
+
+    {# Funciones Predefinidas #}
+    <hr>
+    <h2>Funciones Predefinidas</h2>
+    <p>El min de mis números es {{ min([9,1,3,4,123,-2]) }}</p>
+    <p>El número random de mis números es {{ random([9,1,3,4,123,-2]) }}</p>
+    <p>El número max de mis números es {{ max([9,1,3,4,123,-2]) }}</p>
+    {% set misNumeros = [9,1,3,4,123,-2] %}
+    <p>El dump de misNumeros es {{ dump(misNumeros) }}</p>
+
+
+    {% for i in range(-10,0, 2) %} {# El tercer parametro me indica los numeros que se salta en cada iteración #}
+        {{ i }} <br/>
+    {% endfor %}
+
+    {# Include #}
+
+    {{ include ("partials/includeEjemplo.html.twig", {'miParametro':'www.AngelDeveloper.es'}) }}
+    <hr>
+    {# Filtros | Pipes #}
+    <a href="https://twig.symfony.com/doc/3.x/filters/index.html"><h2>Filtros | Pipes</h2></a>
+    <ul>
+        <li> animales|length es {{ animales|length }}</li>
+        <li> animales|first es {{ animales|first }}</li>
+        <li> animales|last es {{ animales|last }}</li>
+        <li> animales|join es {{ animales|join }}</li>
+        <li> animales|json_encode es {{ animales|json_encode }}</li>
+
+    </ul>
+
+    <h3>trim y upper</h3>
+    {% set email = '    info@angeldeveloper.es  ' %}
+
+    <p> dump(email)</p>
+    {{ dump(email) }}
+    <p> vs dump(email|trim|upper)</p>
+    {{ dump(email|trim|upper) }}
+    <hr>
+
+    {# Filtros Personalizados #}
+    {#
+        * Creamos carpeta src/twig
+        * Creamos nuestro filtro a través de la consola de comandos en la carpeta de nuestra app:
+            php bin/console make:twig-extension MiFiltro
+        * Me crea src/Twig/MiFiltroExtension.php
+            * genera las funciones getFilters(), getFunctions y doSomething
+        * Transformo la función doSomething() en multiplicar() y pongo código para mostrar la tabla de multiplicar
+        * Tengo que llevarme esta función a mis servicios para poder usarla:
+            config/services.yaml --> introducimos el siguiente código
+
+                  App\Twig\:
+                      resource: '../src/Twig/'
+                      tags: [ 'Twig.extension' ]
+
+    #}
+    <h2>Extensiones personalizadas</h2>
+    {{ multiplicar(2) | raw }} {# aplico el filtro raw para que me salga el html formateado#}
+    <hr>
+    {{ multiplicar(23) | raw }} {# aplico el filtro raw para que me salga el html formateado#}
+    <hr>
+
+
+
+
+{% endblock %}

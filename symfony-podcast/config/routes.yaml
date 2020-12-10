@@ -1,3 +1,24 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+  path: /inicio
+  controller: App\Controller\HomeController::index
+
+animales:
+  path: /animales/{nombre?}/{apellidos} #la interrogación hace que el parámetro no sea obligatorio
+  controller: App\Controller\HomeController::animales
+  defaults: { nombre: 'Centauro', apellidos: 'Animal mitológico' } #nombre por defecto para cuando no pongo parámetro, ya no hace falta poner la interrogación
+  methods: [ GET, POST ] #Puedo indicar lo métodos que acepta la ruta
+  requirements:
+    nombre: '[a-zA-z]+'
+    apellidos: '[0-9]+' #de esta manera el apellido tiene que ser numérico
+
+redirigir1:
+  path: /redirigir1
+  controller: App\Controller\HomeController::redirigir1
+
+redirigir2:
+  path: /redirigir2
+  controller: App\Controller\HomeController::redirigir2
+
+redirigir3:
+  path: /redirigir3
+  controller: App\Controller\HomeController::redirigir3
