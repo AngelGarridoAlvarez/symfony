@@ -1,21 +1,37 @@
 # Symfony
 
 1. [Crear proyecto de Symfony](#id1)
+
 2. [Estructura proyecto Symfony](#id2)
+
 3. [Controladores y Rutas](#id3)
+
 3.1. [Crear Controladores](#id3.1)
+
 3.2. [Rutas y acciones](#id3.2)
+
 3.2. [Listar rutas en la consola](#id3.2n)
+
 3.3. [Pasar parámetros opcionales con la url](#id3.3)
+
 3.4. [Redirecciones](#id3.4)
+
 4. [Vistas, Plantillas y Twig](#id4)
+
 4.2. [Arrays](#id4.2)
+
 4.3. [Estructuras de control](#id4.3)
+
 4.4. [Funciones Predefinidas](#id4.4)
+
 4.5. [Includes](#id4.5)
+
 4.6. [Filtros | Pipes](#id4.6)
+
 4.7. [Crear nuestro propio filtro](#id4.7)
+
 5. [Bases de datos y Doctrine](#id5)
+
 5.1. [Convertir mis Tablas a Entidades y Clases utilizables en Symfony](#id5.1.)
 
 
